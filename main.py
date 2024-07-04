@@ -71,16 +71,11 @@ if __name__ == '__main__':
         reqcount = reqcount + 1
         curdate = datetime.now()
         print (curdate, " - How Many Sites Available: ", count, " How Many Requests: ", reqcount)
+        if (count>0):
+            try:
+                driver = open_browser(url, headless=False)
+                time.sleep(4)
+                driver.quit()
+            except:
+                print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
         time.sleep(int(delay))
-
-
-
-    while(1):
-        try:
-            driver = open_browser(url, headless=False)
-            time.sleep(4)
-            driver.quit()
-        except:
-            print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
-        time.sleep(int(delay))
-
