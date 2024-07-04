@@ -25,6 +25,7 @@ def open_browser(url: str, headless=False):
 
     
     WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
+    time.sleep(2)
     result = driver.find_element(by=By.ID, value='list-view-button-button')
     result.click()
     time.sleep(5)
