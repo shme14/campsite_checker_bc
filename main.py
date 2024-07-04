@@ -23,29 +23,29 @@ def open_browser(url: str, headless=False):
     driver = webdriver.Firefox()
     driver.get(url)
 
-    try:
-        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
-        result = driver.find_element(by=By.ID, value='list-view-button-button')
-        result.click()
-        time.sleep(5)
-        #check if the list populates with anything
-        listResults = driver.find_element(By.CSS_SELECTOR, "#resource-name-0")
-        print("Sites Found!")
-        #Select the first list item
-        firstSite = driver.find_element(By.CSS_SELECTOR, "mat-expansion-panel.mat-expansion-panel:nth-child(1)")
-        firstSite.click()
-        time.sleep(1)
-        #Site number
-        firstSiteName = driver.find_element(By.CSS_SELECTOR, ".site-details-wrapper > div:nth-child(2) > div:nth-child(1) > h2:nth-child(1)")
-        print(firstSiteName.text)
-        alertMe(driver,firstSiteName.text)
-        #Select Reserve
-        reserveButton = driver.find_element(By.CSS_SELECTOR, "#reserveButton-0")
-        reserveButton.click()
-        input("Press Enter to continue...")
-        
-    except:
-        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - No Sites Found or Error")
+    
+    WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
+    result = driver.find_element(by=By.ID, value='list-view-button-button')
+    result.click()
+    time.sleep(5)
+    #check if the list populates with anything
+    listResults = driver.find_element(By.CSS_SELECTOR, "#resource-name-0")
+    print("Sites Found!")
+    #Select the first list item
+    firstSite = driver.find_element(By.CSS_SELECTOR, "mat-expansion-panel.mat-expansion-panel:nth-child(1)")
+    firstSite.click()
+    time.sleep(1)
+    #Site number
+    firstSiteName = driver.find_element(By.CSS_SELECTOR, ".site-details-wrapper > div:nth-child(2) > div:nth-child(1) > h2:nth-child(1)")
+    print(firstSiteName.text)
+    alertMe(driver,firstSiteName.text)
+    #Select Reserve
+    reserveButton = driver.find_element(By.CSS_SELECTOR, "#reserveButton-0")
+    reserveButton.click()
+    input("Press Enter to continue...")
+    # try:
+    # except:
+    print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - No Sites Found or Error")
 
     return driver
 
