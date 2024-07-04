@@ -26,8 +26,9 @@ def open_browser(url: str, headless=False):
     
     WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
     time.sleep(2)
-    result = driver.find_element(by=By.ID, value='list-view-button-button')
-    result.click()
+    element = driver.find_element(by=By.ID, value='list-view-button-button')
+    driver.execute_script("$(arguments[0]).click();", element)
+    #result.click()
     time.sleep(5)
     #check if the list populates with anything
     listResults = driver.find_element(By.CSS_SELECTOR, "#resource-name-0")
