@@ -64,21 +64,24 @@ if __name__ == '__main__':
     print(delay)
     reqcount=0
     while (1):
-        count=0
-        x = requests.get(apiURL)
-        d = x.json()
-        for i, obj in d['resourceAvailabilities'].items():
-            for y in obj:
-                    if (y['availability'] == 0):
-                        count = count + 1
-        reqcount = reqcount + 1
-        curdate = datetime.now()
-        print (curdate, " - How Many Sites Available: ", count, " How Many Requests: ", reqcount)
-        if (count>0):
-            try:
-                driver = open_browser(url, headless=False)
-                time.sleep(4)
-                driver.quit()
-            except:
-                print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
-        time.sleep(int(delay))
+        try:
+            count=0
+            x = requests.get(apiURL)
+            d = x.json()
+            for i, obj in d['resourceAvailabilities'].items():
+                for y in obj:
+                        if (y['availability'] == 0):
+                            count = count + 1
+            reqcount = reqcount + 1
+            curdate = datetime.now()
+            print (curdate, " - How Many Sites Available: ", count, " How Many Requests: ", reqcount)
+            if (count>0):
+                try:
+                    driver = open_browser(url, headless=False)
+                    time.sleep(4)
+                    driver.quit()
+                except:
+                    print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
+            time.sleep(int(delay))
+        except:
+            print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
