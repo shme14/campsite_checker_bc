@@ -25,6 +25,10 @@ def open_browser(url: str, headless=False):
     driver.Manage().Window.Maximize();  
     
     WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
+    #accept consent
+    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'consentButton')))
+    result = driver.find_element(by=By.ID, value='consentButton')
+    result.click()
     time.sleep(2)
     result = driver.find_element(by=By.ID, value='list-view-button-button')
     result.click()
