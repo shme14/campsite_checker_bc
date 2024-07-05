@@ -22,7 +22,6 @@ apiURL = os.environ.get('ENV_APIURL')
 def open_browser(url: str, headless=False):
     driver = webdriver.Firefox()
     driver.get(url)
-    driver.Manage().Window.Maximize();  
     
     WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
     #accept consent
