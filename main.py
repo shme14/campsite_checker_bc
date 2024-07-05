@@ -22,34 +22,33 @@ apiURL = os.environ.get('ENV_APIURL')
 def open_browser(url: str, headless=False):
     driver = webdriver.Firefox()
     driver.get(url)
-    
-    WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
-    #accept consent
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'consentButton')))
-    result = driver.find_element(by=By.ID, value='consentButton')
-    result.click()
-    time.sleep(2)
-    result = driver.find_element(by=By.ID, value='list-view-button-button')
-    result.click()
-    time.sleep(5)
-    #check if the list populates with anything
-    listResults = driver.find_element(By.CSS_SELECTOR, "#resource-name-0")
-    print("Sites Found!")
-    #Select the first list item
-    firstSite = driver.find_element(By.CSS_SELECTOR, "mat-expansion-panel.mat-expansion-panel:nth-child(1)")
-    firstSite.click()
-    time.sleep(1)
-    #Site number
-    firstSiteName = driver.find_element(By.CSS_SELECTOR, ".site-details-wrapper > div:nth-child(2) > div:nth-child(1) > h2:nth-child(1)")
-    print(firstSiteName.text)
-    alertMe(driver,firstSiteName.text)
-    #Select Reserve
-    reserveButton = driver.find_element(By.CSS_SELECTOR, "#reserveButton-0")
-    reserveButton.click()
-    input("Press Enter to continue...")
-    # try:
-    # except:
-    print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - No Sites Found or Error")
+    try:
+        WebDriverWait(driver, 90).until(EC.presence_of_element_located((By.ID, 'list-view-button-button')))
+        #accept consent
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, 'consentButton')))
+        result = driver.find_element(by=By.ID, value='consentButton')
+        result.click()
+        time.sleep(2)
+        result = driver.find_element(by=By.ID, value='list-view-button-button')
+        result.click()
+        time.sleep(5)
+        #check if the list populates with anything
+        listResults = driver.find_element(By.CSS_SELECTOR, "#resource-name-0")
+        print("Sites Found!")
+        #Select the first list item
+        firstSite = driver.find_element(By.CSS_SELECTOR, "mat-expansion-panel.mat-expansion-panel:nth-child(1)")
+        firstSite.click()
+        time.sleep(1)
+        #Site number
+        firstSiteName = driver.find_element(By.CSS_SELECTOR, ".site-details-wrapper > div:nth-child(2) > div:nth-child(1) > h2:nth-child(1)")
+        print(firstSiteName.text)
+        alertMe(driver,firstSiteName.text)
+        #Select Reserve
+        reserveButton = driver.find_element(By.CSS_SELECTOR, "#reserveButton-0")
+        reserveButton.click()
+        input("Press Enter to continue...")
+    except:
+        print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - No Sites Found or Error")
 
     return driver
 
@@ -76,10 +75,10 @@ if __name__ == '__main__':
         curdate = datetime.now()
         print (curdate, " - How Many Sites Available: ", count, " How Many Requests: ", reqcount)
         if (count>0):
-            # try:
-            driver = open_browser(url, headless=False)
-            time.sleep(4)
-            driver.quit()
-            # except:
-            #     print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
+            try:
+                driver = open_browser(url, headless=False)
+                time.sleep(4)
+                driver.quit()
+            except:
+                print(datetime.now().strftime('%Y-%m-%d %H:%M:%S') + " - Something went wrong")
         time.sleep(int(delay))
