@@ -16,7 +16,7 @@ chat_id = os.environ.get('ENV_CHATID')
 delay = os.environ.get('ENV_DELAY')
 port = os.environ.get('ENV_PORT')
 apiURL = os.environ.get('ENV_APIURL')
-
+headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36"}
 
 
 def open_browser(url: str, headless=False):
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     while (1):
         try:
             count=0
-            x = requests.get(apiURL)
+            x = requests.get(apiURL, headers=headers)
             d = x.json()
             for i, obj in d['resourceAvailabilities'].items():
                 for y in obj:
